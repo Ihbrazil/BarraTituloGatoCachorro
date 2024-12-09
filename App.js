@@ -1,20 +1,57 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { FontAwesome5 } from '@expo/vector-icons';
+
+import TelaGato from './componentes/TelaGato';
+import TelaCachorro from './componentes/TelaCachorro';
+
+const Tabs = createBottomTabNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Tabs.Navigator
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: '#4530b2'
+          },
+          headerTitleStyle: {
+            color: '#fff',
+            fontWeight: 'bold',
+          },
+          headerTitleAlign: 'center',
+
+          tabBarStyle: {
+            backgroundColor: "#fff",
+          },
+          tabBarLabelStyle: {
+            fontWeight: 'bold',
+          },
+          tabBarActiveBackgroundColor: "#ff7a00",
+          tabBarActiveTintColor: "#fff",
+        }}
+      >
+        <Tabs.Screen
+          name="Gato"
+          component={TelaGato}
+          options={{
+            tabBarIcon: ({ color }) => (
+              <FontAwesome5 name="cat" size={24} color={color} />
+            ),
+          }}
+        />
+
+        <Tabs.Screen
+          name="Cachorro"
+          component={TelaCachorro}
+          options={{
+            tabBarIcon: ({ color }) => (
+              <FontAwesome5 name="dog" size={24} color={color} />
+            ),
+          }}
+        />
+      </Tabs.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
